@@ -3,11 +3,13 @@
 'use client'
 
 import {useState, useEffect, useMemo} from 'react'
+import {calculateLoanPayments} from '@/lib/utils'
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card'
 import {DeviceInformation} from '@/components/iphone-pricing/DeviceInformation' // Import DeviceInformation
 import {LoanInformation} from '@/components/iphone-pricing/LoanInformation' // Import LoanInformation
 import {EstimationResults} from '@/components/iphone-pricing/EstimationResults' // Import EstimationResults
 import iphonePriceList from '@/lib/iphone_price_list_partial.json' // Import the data
+import {PaymentInstallment} from '@/lib/types' // Import the shared type
 
 interface IphoneData {
 	model: string
@@ -15,22 +17,26 @@ interface IphoneData {
 	price_range_vnd: number[]
 }
 
+// Local definition removed - using imported type
+
 export default function Home() {
 	const [selectedModel, setSelectedModel] = useState<string>('')
 	const [selectedStorage, setSelectedStorage] = useState<string>('')
 	const [conditionPercentage, setConditionPercentage] = useState<number>(99) // Default 99% condition
-	const [loanRatio, setLoanRatio] = useState<number>(30) // Default 30%
-	const [loanMonths, setLoanMonths] = useState<number>(3) // Default 3 months
-	const [interestRate, setInterestRate] = useState<number>(1.5) // Default 1.5% per month
+	const [loanMonths, setLoanMonths] = useState<number>(1) // Default 1 month
+	const [startDate, setStartDate] = useState<Date | undefined>(new Date()) // Default today
 
 	// State for Model Search Popover
 	const [modelPopoverOpen, setModelPopoverOpen] = useState(false)
 
+	// Market Price and Loan Amount
 	const [marketPrice, setMarketPrice] = useState<number>(0)
-	const [loanPrincipal, setLoanPrincipal] = useState<number>(0)
-	const [loanCost, setLoanCost] = useState<number>(0)
-	const [totalPayment, setTotalPayment] = useState<number>(0)
-	const [monthlyPayment, setMonthlyPayment] = useState<number>(0) // State for monthly payment
+	const [loanAmount, setLoanAmount] = useState<number>(0)
+
+	// Results
+	const [paymentSchedule, setPaymentSchedule] = useState<PaymentInstallment[]>([])
+	const [totalInterestPaid, setTotalInterestPaid] = useState<number>(0)
+	const [totalPaid, setTotalPaid] = useState<number>(0)
 
 	const models = useMemo(() => {
 		const uniqueModels = new Set(iphonePriceList.map((item) => item.model))
@@ -58,34 +64,32 @@ export default function Home() {
 		} else {
 			setMarketPrice(0)
 		}
-	}, [selectedModel, selectedStorage, conditionPercentage]) // Add conditionPercentage dependency
+	}, [selectedModel, selectedStorage, conditionPercentage])
+
+	// Effect to update loan amount when market price changes
+	useEffect(() => {
+		if (marketPrice === 0) {
+			setLoanAmount(0)
+		} else {
+			setLoanAmount(Math.floor(marketPrice / 3)) // Set default loan amount to 1/3 of market price
+		}
+	}, [marketPrice])
 
 	useEffect(() => {
-		// Recalculate loan details when inputs change
-		if (marketPrice > 0 && loanRatio > 0 && loanMonths > 0 && interestRate >= 0) {
-			const principal = marketPrice * (loanRatio / 100)
-			const cost = principal * (interestRate / 100) * loanMonths
-			const total = principal + cost
+		setPaymentSchedule([])
+		setTotalInterestPaid(0)
+		setTotalPaid(0)
 
-			setLoanPrincipal(principal)
-			setLoanCost(cost)
-			setTotalPayment(total)
-		} else {
-			setLoanPrincipal(0)
-			setLoanCost(0)
-			setTotalPayment(0)
-			setMonthlyPayment(0) // Reset monthly payment
+		if (loanAmount <= 0 || !startDate || loanMonths < 1 || loanMonths > 6) {
+			return // Exit if inputs are invalid
 		}
-	}, [marketPrice, loanRatio, loanMonths, interestRate])
 
-	// Calculate monthly payment when total payment changes
-	useEffect(() => {
-		if (totalPayment > 0 && loanMonths > 0) {
-			setMonthlyPayment(totalPayment / loanMonths)
-		} else {
-			setMonthlyPayment(0)
-		}
-	}, [totalPayment, loanMonths])
+		const {schedule, totalInterest, totalPayment} = calculateLoanPayments(loanAmount, loanMonths, startDate)
+
+		setPaymentSchedule(schedule)
+		setTotalInterestPaid(totalInterest)
+		setTotalPaid(totalPayment)
+	}, [loanAmount, loanMonths, startDate])
 
 	return (
 		<div className='flex items-center justify-center min-h-screen p-4 bg-gray-100 dark:bg-gray-900'>
@@ -100,11 +104,23 @@ export default function Home() {
 					<DeviceInformation models={models} availableStorages={availableStorages} selectedModel={selectedModel} setSelectedModel={setSelectedModel} selectedStorage={selectedStorage} setSelectedStorage={setSelectedStorage} conditionPercentage={conditionPercentage} setConditionPercentage={setConditionPercentage} modelPopoverOpen={modelPopoverOpen} setModelPopoverOpen={setModelPopoverOpen} />
 
 					{/* Loan Information Component */}
-					<LoanInformation loanRatio={loanRatio} setLoanRatio={setLoanRatio} loanMonths={loanMonths} setLoanMonths={setLoanMonths} interestRate={interestRate} setInterestRate={setInterestRate} />
+					<LoanInformation loanAmount={loanAmount} setLoanAmount={setLoanAmount} marketPrice={marketPrice} loanMonths={loanMonths} setLoanMonths={setLoanMonths} startDate={startDate} setStartDate={setStartDate} />
 				</CardContent>
 				<CardFooter className='flex flex-col items-start space-y-4 border-t pt-6'>
-					{/* Estimation Results Component */}
-					<EstimationResults selectedModel={selectedModel} selectedStorage={selectedStorage} conditionPercentage={conditionPercentage} marketPrice={marketPrice} loanRatio={loanRatio} loanPrincipal={loanPrincipal} loanMonths={loanMonths} loanCost={loanCost} totalPayment={totalPayment} monthlyPayment={monthlyPayment} interestRate={interestRate} />
+					{/* Estimation Results Component - Props will be updated later */}
+					<EstimationResults
+						selectedModel={selectedModel}
+						selectedStorage={selectedStorage}
+						conditionPercentage={conditionPercentage}
+						marketPrice={marketPrice}
+						loanAmount={loanAmount}
+						loanMonths={loanMonths}
+						// Corrected props based on EstimationResults interface
+						totalInterestPaid={totalInterestPaid}
+						totalPaid={totalPaid}
+						paymentSchedule={paymentSchedule} // Pass the schedule
+						startDate={startDate} // Pass the start date
+					/>
 				</CardFooter>
 			</Card>
 		</div>

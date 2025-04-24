@@ -1,43 +1,62 @@
 'use client'
 
 import * as React from 'react'
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table'
-import {formatCurrency} from '@/lib/utils' // Import formatCurrency
+import {format} from 'date-fns'
+import {vi} from 'date-fns/locale'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter} from '@/components/ui/table' // Added TableFooter
+import {formatCurrency} from '@/lib/utils'
+import {PaymentInstallment} from '@/lib/types' // Import the shared type
 
 interface PaymentScheduleTableProps {
-	loanMonths: number
-	monthlyPayment: number
-	totalPayment: number
+	paymentSchedule: PaymentInstallment[]
+	startDate: Date | undefined // Needed to display dates if schedule doesn't contain them directly (depends on final calculation logic)
 }
 
-export function PaymentScheduleTable({loanMonths, monthlyPayment, totalPayment}: PaymentScheduleTableProps) {
-	if (loanMonths <= 0 || totalPayment <= 0) {
-		return null // Don't render if there's nothing to show
+export function PaymentScheduleTable({paymentSchedule, startDate}: PaymentScheduleTableProps) {
+	if (!paymentSchedule || paymentSchedule.length === 0 || !startDate) {
+		return null // Don't render if there's no schedule or start date
 	}
+
+	// Calculate totals
+	const totalPrincipal = paymentSchedule.reduce((sum, item) => sum + item.principalPayment, 0)
+	const totalInterest = paymentSchedule.reduce((sum, item) => sum + item.interestPayment, 0)
+	const totalPaid = paymentSchedule.reduce((sum, item) => sum + item.totalPayment, 0)
 
 	return (
 		<div className='w-full pt-4'>
-			<h4 className='font-semibold mb-2'>Lịch thanh toán dự kiến</h4>
+			<h4 className='font-semibold mb-2'>Lịch thanh toán chi tiết (ước tính)</h4>
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className='w-[100px]'>Kỳ</TableHead>
-						<TableHead className='text-right'>Số tiền</TableHead>
-						{/* Add other columns later if needed */}
+						<TableHead className='w-[50px]'>Kỳ</TableHead>
+						<TableHead>Ngày TT</TableHead>
+						<TableHead className='text-right'>Trả gốc</TableHead>
+						<TableHead className='text-right'>Trả lãi</TableHead>
+						<TableHead className='text-right'>Tổng trả</TableHead>
+						<TableHead className='text-right'>Dư nợ</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{Array.from({length: loanMonths}, (_, i) => (
-						<TableRow key={i}>
-							<TableCell>Tháng {i + 1}</TableCell>
-							<TableCell className='text-right'>{formatCurrency(monthlyPayment)}</TableCell>
+					{paymentSchedule.map((installment) => (
+						<TableRow key={installment.installmentNumber}>
+							<TableCell className='text-center'>{installment.installmentNumber}</TableCell>
+							<TableCell>{format(installment.paymentDate, 'dd/MM/yy', {locale: vi})}</TableCell>
+							<TableCell className='text-right'>{formatCurrency(installment.principalPayment)}</TableCell>
+							<TableCell className='text-right'>{formatCurrency(installment.interestPayment)}</TableCell>
+							<TableCell className='text-right'>{formatCurrency(installment.totalPayment)}</TableCell>
+							<TableCell className='text-right'>{formatCurrency(installment.remainingBalance)}</TableCell>
 						</TableRow>
 					))}
-					<TableRow className='font-bold bg-muted/50'>
-						<TableCell>Tổng cộng</TableCell>
-						<TableCell className='text-right'>{formatCurrency(totalPayment)}</TableCell>
-					</TableRow>
 				</TableBody>
+				<TableFooter>
+					<TableRow className='font-bold bg-muted/50'>
+						<TableCell colSpan={2}>Tổng cộng</TableCell>
+						<TableCell className='text-right'>{formatCurrency(totalPrincipal)}</TableCell>
+						<TableCell className='text-right'>{formatCurrency(totalInterest)}</TableCell>
+						<TableCell className='text-right'>{formatCurrency(totalPaid)}</TableCell>
+						<TableCell /> {/* Empty cell for remaining balance column */}
+					</TableRow>
+				</TableFooter>
 			</Table>
 		</div>
 	)

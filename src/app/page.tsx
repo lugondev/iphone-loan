@@ -15,6 +15,7 @@ import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover' 
 // Keep Select imports if needed elsewhere, otherwise remove
 // import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select'
 import {Checkbox} from '@/components/ui/checkbox' // Import Checkbox
+import {Slider} from '@/components/ui/slider' // Import Slider
 import iphonePriceList from '@/lib/iphone_price_list_partial.json' // Import the data
 
 interface IphoneData {
@@ -31,9 +32,10 @@ const formatCurrency = (value: number): string => {
 export default function Home() {
 	const [selectedModel, setSelectedModel] = useState<string>('')
 	const [selectedStorage, setSelectedStorage] = useState<string>('')
+	const [conditionPercentage, setConditionPercentage] = useState<number>(99) // Default 99% condition
 	const [loanRatio, setLoanRatio] = useState<number>(30) // Default 50%
 	const [loanMonths, setLoanMonths] = useState<number>(3) // Default 12 months
-	const [interestRate, setInterestRate] = useState<number>(1.5) // Default 1.5% per month
+	const [interestRate] = useState<number>(1.5) // Default 1.5% per month
 
 	// State for Model Search Popover
 	const [modelPopoverOpen, setModelPopoverOpen] = useState(false)
@@ -62,12 +64,14 @@ export default function Home() {
 	useEffect(() => {
 		if (selectedModel && selectedStorage) {
 			const selectedPhone = iphonePriceList.find((item: IphoneData) => item.model === selectedModel && item.storage === selectedStorage)
-			const price = selectedPhone?.price_range_vnd[0] || 0
-			setMarketPrice(price)
+			const basePrice = selectedPhone?.price_range_vnd[0] || 0
+			// Adjust price based on condition
+			const adjustedPrice = basePrice * (conditionPercentage / 100)
+			setMarketPrice(adjustedPrice)
 		} else {
 			setMarketPrice(0)
 		}
-	}, [selectedModel, selectedStorage])
+	}, [selectedModel, selectedStorage, conditionPercentage]) // Add conditionPercentage dependency
 
 	useEffect(() => {
 		// Recalculate loan details when inputs change
@@ -158,11 +162,23 @@ export default function Home() {
 						</div>
 					)}
 
+					{/* Condition Slider - Show only when model and storage are selected */}
+					{selectedModel && selectedStorage && (
+						<div className='space-y-2'>
+							<Label htmlFor='condition'>Độ mới của máy (%)</Label>
+							<div className='flex items-center space-x-4'>
+								<Slider id='condition' min={50} max={99} step={1} value={[conditionPercentage]} onValueChange={(value) => setConditionPercentage(value[0])} className='flex-1' />
+								<span className='min-w-[40px] text-right font-medium'>{conditionPercentage}%</span>
+							</div>
+							<p className='text-sm text-muted-foreground'>Chọn độ mới ước tính của máy (50% - 99%).</p>
+						</div>
+					)}
+
 					{/* Loan Ratio Input */}
 					<div className='space-y-2'>
 						<Label htmlFor='loanRatio'>Tỷ lệ cầm (%)</Label>
-						<Input id='loanRatio' type='number' value={loanRatio} onChange={(e) => setLoanRatio(Math.max(0, Math.min(100, Number(e.target.value))))} placeholder='45-55' min='0' max='100' />
-						<p className='text-sm text-muted-foreground'>Tỷ lệ phần trăm giá trị máy được cho vay (thường 45-55%).</p>
+						<Input id='loanRatio' type='number' value={loanRatio} onChange={(e) => setLoanRatio(Math.max(0, Math.min(100, Number(e.target.value))))} placeholder='30' min='0' max='100' />
+						<p className='text-sm text-muted-foreground'>Tỷ lệ phần trăm giá trị máy được cho vay (thường 30%).</p>
 					</div>
 
 					{/* Loan Months Input */}
@@ -172,18 +188,18 @@ export default function Home() {
 					</div>
 
 					{/* Interest Rate Input */}
-					<div className='space-y-2'>
+					{/* <div className='space-y-2'>
 						<Label htmlFor='interestRate'>Lãi suất tháng (%)</Label>
 						<Input id='interestRate' type='number' step='0.1' value={interestRate} onChange={(e) => setInterestRate(Math.max(0, Number(e.target.value)))} placeholder='Nhập lãi suất %' min='0' />
 						<p className='text-sm text-muted-foreground'>Lãi suất tính theo tháng.</p>
-					</div>
+					</div> */}
 				</CardContent>
 				<CardFooter className='flex flex-col items-start space-y-2 border-t pt-4'>
 					<h3 className='font-semibold'>Kết quả ước tính:</h3>
 					{marketPrice > 0 ? (
 						<>
 							<p>
-								Giá thị trường tham khảo: <span className='font-medium'>{formatCurrency(marketPrice)}</span>
+								Giá tham khảo (theo độ mới {conditionPercentage}%): <span className='font-medium'>{formatCurrency(marketPrice)}</span>
 							</p>
 							<p>
 								Gốc vay ước tính: <span className='font-medium'>{formatCurrency(loanPrincipal)}</span>

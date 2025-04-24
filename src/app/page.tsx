@@ -1,7 +1,5 @@
 'use client'
 
-'use client'
-
 import {useState, useEffect, useMemo} from 'react'
 import {calculateLoanPayments} from '@/lib/utils'
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card'

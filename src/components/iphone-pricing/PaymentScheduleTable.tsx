@@ -31,7 +31,7 @@ export function PaymentScheduleTable({paymentSchedule, startDate}: PaymentSchedu
 						<TableHead className='w-[50px]'>Kỳ</TableHead>
 						<TableHead>Ngày TT</TableHead>
 						<TableHead className='text-right'>Trả gốc</TableHead>
-						<TableHead className='text-right'>Trả lãi</TableHead>
+						<TableHead className='text-right'>Chi phí vay</TableHead>
 						<TableHead className='text-right'>Tổng trả</TableHead>
 						<TableHead className='text-right'>Dư nợ</TableHead>
 					</TableRow>

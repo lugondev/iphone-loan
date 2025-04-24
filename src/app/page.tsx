@@ -92,8 +92,8 @@ export default function Home() {
 	}, [loanAmount, loanMonths, startDate])
 
 	return (
-		<div className='flex items-center justify-center min-h-screen p-4 bg-gray-100 dark:bg-gray-900'>
-			<Card className='w-full max-w-lg'>
+		<div className='flex items-center justify-center min-h-screen p-6 bg-gray-100 dark:bg-gray-900'>
+			<Card className='w-full max-w-4xl'>
 				<CardHeader>
 					{/* Updated Title and Description */}
 					<CardTitle>Ước Tính Giá iPhone Cũ & Khoản Vay</CardTitle>

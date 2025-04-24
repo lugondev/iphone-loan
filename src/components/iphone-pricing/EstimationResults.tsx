@@ -37,7 +37,7 @@ export function EstimationResults({selectedModel, selectedStorage, conditionPerc
 							<span className='font-medium'>{formatCurrency(loanAmount)}</span>
 						</div>
 						<div className='flex justify-between'>
-							<span>Tổng lãi ước tính ({loanMonths} tháng):</span>
+							<span>Tổng chi phí vay ({loanMonths} tháng):</span>
 							<span className='font-medium'>{formatCurrency(totalInterestPaid)}</span>
 						</div>
 						<div className='flex justify-between font-bold pt-2 border-t mt-2'>
@@ -45,7 +45,7 @@ export function EstimationResults({selectedModel, selectedStorage, conditionPerc
 							<span>{formatCurrency(totalPaid)}</span>
 						</div>
 						<div className='w-full pt-4 text-sm text-muted-foreground space-y-1'>
-							<p>• Đây là ước tính dựa trên giá tham khảo. Lãi suất và gốc trả hàng tháng có thể thay đổi tùy theo thời hạn vay.</p>
+							<p>• Đây là ước tính dựa trên giá tham khảo. Chi phí vay và gốc trả hàng tháng có thể thay đổi tùy theo thời hạn vay.</p>
 							<p>• Khoản vay và lịch thanh toán chỉ mang tính tham khảo, không phải là đề nghị cho vay chính thức.</p>
 							<p>• Liên hệ với cửa hàng để biết thông tin chi tiết và thủ tục vay chính xác.</p>
 						</div>

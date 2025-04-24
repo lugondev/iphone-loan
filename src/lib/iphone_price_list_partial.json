@@ -1,0 +1,492 @@
+[
+  {
+    "model": "iPhone 11",
+    "storage": "64GB",
+    "price_range_vnd": [
+      5090000
+    ]
+  },
+  {
+    "model": "iPhone 11",
+    "storage": "128GB",
+    "price_range_vnd": [
+      5990000
+    ]
+  },
+  {
+    "model": "iPhone 11",
+    "storage": "256GB",
+    "price_range_vnd": [
+      7990000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro",
+    "storage": "64GB",
+    "price_range_vnd": [
+      5990000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      6890000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro",
+    "storage": "512GB",
+    "price_range_vnd": [
+      7890000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro Max",
+    "storage": "64GB",
+    "price_range_vnd": [
+      7390000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      8490000
+    ]
+  },
+  {
+    "model": "iPhone 11 Pro Max",
+    "storage": "512GB",
+    "price_range_vnd": [
+      8490000
+    ]
+  },
+  {
+    "model": "iPhone 12 mini",
+    "storage": "64GB",
+    "price_range_vnd": [
+      7090000
+    ]
+  },
+  {
+    "model": "iPhone 12 mini",
+    "storage": "128GB",
+    "price_range_vnd": [
+      7890000
+    ]
+  },
+  {
+    "model": "iPhone 12 mini",
+    "storage": "256GB",
+    "price_range_vnd": [
+      8390000
+    ]
+  },
+  {
+    "model": "iPhone 12",
+    "storage": "64GB",
+    "price_range_vnd": [
+      5890000
+    ]
+  },
+  {
+    "model": "iPhone 12",
+    "storage": "128GB",
+    "price_range_vnd": [
+      6990000
+    ]
+  },
+  {
+    "model": "iPhone 12",
+    "storage": "256GB",
+    "price_range_vnd": [
+      7390000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro",
+    "storage": "128GB",
+    "price_range_vnd": [
+      7790000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      8590000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro",
+    "storage": "512GB",
+    "price_range_vnd": [
+      9390000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro Max",
+    "storage": "128GB",
+    "price_range_vnd": [
+      9990000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      10890000
+    ]
+  },
+  {
+    "model": "iPhone 12 Pro Max",
+    "storage": "512GB",
+    "price_range_vnd": [
+      11990000
+    ]
+  },
+  {
+    "model": "iPhone 13 mini",
+    "storage": "128GB",
+    "price_range_vnd": [
+      10190000
+    ]
+  },
+  {
+    "model": "iPhone 13 mini",
+    "storage": "256GB",
+    "price_range_vnd": [
+      11190000
+    ]
+  },
+  {
+    "model": "iPhone 13 mini",
+    "storage": "512GB",
+    "price_range_vnd": [
+      11350000
+    ]
+  },
+  {
+    "model": "iPhone 13",
+    "storage": "128GB",
+    "price_range_vnd": [
+      8790000
+    ]
+  },
+  {
+    "model": "iPhone 13",
+    "storage": "256GB",
+    "price_range_vnd": [
+      9690000
+    ]
+  },
+  {
+    "model": "iPhone 13",
+    "storage": "512GB",
+    "price_range_vnd": [
+      13690000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro",
+    "storage": "128GB",
+    "price_range_vnd": [
+      10690000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      12090000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro",
+    "storage": "512GB",
+    "price_range_vnd": [
+      17690000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro Max",
+    "storage": "128GB",
+    "price_range_vnd": [
+      12890000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      13790000
+    ]
+  },
+  {
+    "model": "iPhone 13 Pro Max",
+    "storage": "512GB",
+    "price_range_vnd": [
+      14390000
+    ]
+  },
+  {
+    "model": "iPhone 14",
+    "storage": "128GB",
+    "price_range_vnd": [
+      10190000
+    ]
+  },
+  {
+    "model": "iPhone 14",
+    "storage": "256GB",
+    "price_range_vnd": [
+      14790000
+    ]
+  },
+  {
+    "model": "iPhone 14",
+    "storage": "512GB",
+    "price_range_vnd": [
+      15290000
+    ]
+  },
+  {
+    "model": "iPhone 14 Plus",
+    "storage": "128GB",
+    "price_range_vnd": [
+      11690000
+    ]
+  },
+  {
+    "model": "iPhone 14 Plus",
+    "storage": "256GB",
+    "price_range_vnd": [
+      15690000
+    ]
+  },
+  {
+    "model": "iPhone 14 Plus",
+    "storage": "512GB",
+    "price_range_vnd": [
+      16190000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro",
+    "storage": "128GB",
+    "price_range_vnd": [
+      13690000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      14390000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro",
+    "storage": "512GB",
+    "price_range_vnd": [
+      16790000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro",
+    "storage": "1TB",
+    "price_range_vnd": [
+      20790000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro Max",
+    "storage": "128GB",
+    "price_range_vnd": [
+      16190000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      16790000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro Max",
+    "storage": "512GB",
+    "price_range_vnd": [
+      22490000
+    ]
+  },
+  {
+    "model": "iPhone 14 Pro Max",
+    "storage": "1TB",
+    "price_range_vnd": [
+      22690000
+    ]
+  },
+  {
+    "model": "iPhone 15",
+    "storage": "128GB",
+    "price_range_vnd": [
+      13490000
+    ]
+  },
+  {
+    "model": "iPhone 15",
+    "storage": "256GB",
+    "price_range_vnd": [
+      14990000
+    ]
+  },
+  {
+    "model": "iPhone 15",
+    "storage": "512GB",
+    "price_range_vnd": [
+      15990000
+    ]
+  },
+  {
+    "model": "iPhone 15 Plus",
+    "storage": "128GB",
+    "price_range_vnd": [
+      15990000
+    ]
+  },
+  {
+    "model": "iPhone 15 Plus",
+    "storage": "256GB",
+    "price_range_vnd": [
+      18590000
+    ]
+  },
+  {
+    "model": "iPhone 15 Plus",
+    "storage": "512GB",
+    "price_range_vnd": [
+      19990000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro",
+    "storage": "128GB",
+    "price_range_vnd": [
+      17090000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      18490000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro",
+    "storage": "512GB",
+    "price_range_vnd": [
+      23690000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro",
+    "storage": "1TB",
+    "price_range_vnd": [
+      25190000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      21190000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro Max",
+    "storage": "512GB",
+    "price_range_vnd": [
+      25690000
+    ]
+  },
+  {
+    "model": "iPhone 15 Pro Max",
+    "storage": "1TB",
+    "price_range_vnd": [
+      27190000
+    ]
+  },
+  {
+    "model": "iPhone 16",
+    "storage": "128GB",
+    "price_range_vnd": [
+      15590000
+    ]
+  },
+  {
+    "model": "iPhone 16",
+    "storage": "256GB",
+    "price_range_vnd": [
+      17290000
+    ]
+  },
+  {
+    "model": "iPhone 16",
+    "storage": "512GB",
+    "price_range_vnd": [
+      18290000
+    ]
+  },
+  {
+    "model": "iPhone 16 Plus",
+    "storage": "128GB",
+    "price_range_vnd": [
+      19190000
+    ]
+  },
+  {
+    "model": "iPhone 16 Plus",
+    "storage": "256GB",
+    "price_range_vnd": [
+      20190000
+    ]
+  },
+  {
+    "model": "iPhone 16 Plus",
+    "storage": "512GB",
+    "price_range_vnd": [
+      21190000
+    ]
+  },
+  {
+    "model": "iPhone 16 Pro",
+    "storage": "128GB",
+    "price_range_vnd": [
+      20990000
+    ]
+  },
+  {
+    "model": "iPhone 16 Pro",
+    "storage": "256GB",
+    "price_range_vnd": [
+      23990000
+    ]
+  },
+  {
+    "model": "iPhone 16 Pro Max",
+    "storage": "256GB",
+    "price_range_vnd": [
+      25990000
+    ]
+  },
+  {
+    "model": "iPhone 16e",
+    "storage": "128GB",
+    "price_range_vnd": [
+      13790000
+    ]
+  }
+]
